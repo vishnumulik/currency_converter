@@ -1,5 +1,7 @@
 package com.vishnu_mulik.currencyconverter.ui.base.listener
 
+import com.vishnu_mulik.currencyconverter.data.models.ExchangeRates
+
 
 /**
  * CREATED BY Vishnu Mulik  ON  30/05/21
@@ -7,5 +9,5 @@ package com.vishnu_mulik.currencyconverter.ui.base.listener
 
 
 interface CurrencyListClickListener {
-    fun onItemSelected()
+    fun onItemSelected(exchangeRates: ExchangeRates)
 }

@@ -20,5 +20,5 @@ interface ExchangeRatesDao {
     suspend fun deleteAll()
 
     @Query("SELECT * FROM ExchangeRates WHERE source_currency LIKE :sourceCurrency ")
-    fun getExchangeRates( sourceCurrency: String): List<ExchangeRates>
+    fun getExchangeRates(sourceCurrency: String): List<ExchangeRates>
 }

@@ -2,23 +2,18 @@ package com.vishnu_mulik.currencyconverter.data.remote
 
 
 import com.squareup.moshi.Moshi
+import com.vishnu_mulik.currencyconverter.BuildConfig
 import com.vishnu_mulik.currencyconverter.data.remote.moshiFactories.MyKotlinJsonAdapterFactory
 import com.vishnu_mulik.currencyconverter.data.remote.moshiFactories.MyStandardJsonAdapters
-
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.concurrent.TimeUnit
-import javax.inject.Inject
-import javax.inject.Singleton
-import com.vishnu_mulik.currencyconverter.BuildConfig
-import com.vishnu_mulik.currencyconverter.data.remote.remoteService.RemoteDataCaller
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Inject
 
 /**
  * CREATED BY Vishnu Mulik  ON  30/05/21
@@ -45,7 +40,8 @@ class ServiceGenerator
     }
 
     @Provides
-    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor
+    fun provideOkHttpClient(
+        loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)

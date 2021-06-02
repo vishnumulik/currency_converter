@@ -2,7 +2,6 @@ package com.vishnu_mulik.currencyconverter.data.localData.room
 
 import com.vishnu_mulik.currencyconverter.data.models.Currency
 import com.vishnu_mulik.currencyconverter.data.models.ExchangeRates
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
@@ -39,7 +38,7 @@ class RoomData
 
     override suspend fun getExchangeRates(
         source: String
-    ): List<ExchangeRates> =withContext(ioDispatcher){
+    ): List<ExchangeRates> = withContext(ioDispatcher) {
         appDatabase.exchangeRatesDao().getExchangeRates(source)
     }
 

@@ -29,6 +29,7 @@ class DatabaseModule {
             "app.db"
         ).build()
     }
+
     @Provides
     fun provideCurrencyDao(appDatabase: AppDatabase): CurrencyDao {
         return appDatabase.currencyDao()

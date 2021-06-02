@@ -18,5 +18,5 @@ interface DataRepositorySource {
      REMOTE_DATA_CALLER_INTERVAL then api call is invoked else data stored in the
      room database is returned. The api basically fetches all the exchange rates
      of the currency passed */
-    suspend fun getExchangeRates(source : String ) : Flow<Resource<out Any>>
+    suspend fun getExchangeRates(source: String): Flow<Resource<out Any>>
 }

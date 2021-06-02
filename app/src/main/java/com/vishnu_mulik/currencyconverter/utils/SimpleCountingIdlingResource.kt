@@ -1,4 +1,5 @@
 package com.vishnu_mulik.currencyconverter.utils
+
 import androidx.test.espresso.IdlingResource
 
 import java.util.concurrent.atomic.AtomicInteger

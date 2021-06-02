@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.components.currencyList.coversion_dialog.ConversionDialog">
+<androidx.appcompat.widget.AppCompatEditText
+    android:layout_width="match_parent"
+    android:id="@+id/et_amount"
+    android:hint="Enter amount "
+    android:inputType="number"
+    android:layout_height="wrap_content">
+
+</androidx.appcompat.widget.AppCompatEditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/calulation_amount"
+        android:text="iasubiuboAUE"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+</LinearLayout>

@@ -3,7 +3,6 @@ package com.vishnu_mulik.currencyconverter.data.remote
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import javax.inject.Inject
 
 /**
  * Intercepts and adds Token or API Key

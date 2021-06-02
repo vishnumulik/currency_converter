@@ -9,7 +9,7 @@ import javax.inject.Inject
  */
 class ErrorManager @Inject constructor(private val errorMapper: ErrorMapper) : ErrorUseCase {
     override fun getError(errorCode: Int): Error {
-        return Error(code = errorCode, errorDescription =  errorMapper.errorMap.getValue(errorCode))
+        return Error(code = errorCode, errorDescription = errorMapper.errorMap.getValue(errorCode))
     }
 
 }

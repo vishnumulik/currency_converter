@@ -9,10 +9,10 @@ import com.vishnu_mulik.currencyconverter.data.models.ExchangeRates
  */
 interface RoomDataSource {
 
-    suspend fun insertCurrency( currency : Currency)
+    suspend fun insertCurrency(currency: Currency)
     suspend fun deleteAllCurrency()
-    suspend fun getAllCurrencyList() : List<Currency>
-    suspend fun insertExchangeRate(exchangeRate :ExchangeRates)
-    suspend fun getExchangeRates(source: String ) : List<ExchangeRates>
+    suspend fun getAllCurrencyList(): List<Currency>
+    suspend fun insertExchangeRate(exchangeRate: ExchangeRates)
+    suspend fun getExchangeRates(source: String): List<ExchangeRates>
     suspend fun deleteAllExchangeRates()
 }

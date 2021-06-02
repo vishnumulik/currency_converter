@@ -15,4 +15,8 @@
     <dimen name="space_96x">96dp</dimen>
     <dimen name="padding_5">5dp</dimen>
     <dimen name="padding_10">10dp</dimen>
+    <dimen name="padding_20">20dp</dimen>
+    <dimen name="margin_25">25dp</dimen>
+    <dimen name="dimens_zero">0dp</dimen>
+
 </resources>

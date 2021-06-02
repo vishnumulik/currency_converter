@@ -8,4 +8,4 @@ import dagger.hilt.android.HiltAndroidApp
  * CREATED BY Vishnu Mulik  ON  30/05/21
  */
 @HiltAndroidApp
-open  class Application  : Application()
+open class Application : Application()

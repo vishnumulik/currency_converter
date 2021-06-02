@@ -6,5 +6,5 @@ package com.vishnu_mulik.currencyconverter.data.error.errorMapper
  */
 interface ErrorMapperSource {
     fun getErrorString(errorId: Int): String
-    val errorMap : Map<Int,String>
+    val errorMap: Map<Int, String>
 }

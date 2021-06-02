@@ -5,14 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:id="@+id/card_view_input_layout"
+        android:layout_margin="@dimen/padding_10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content">
+        <AutoCompleteTextView
+            android:id="@+id/source_cuurency"
+            android:layout_width="match_parent"
+            android:hint="@string/label_enter_source_currency"
+            android:layout_height="wrap_content">
+
+        </AutoCompleteTextView>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_currency_list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="@dimen/dimens_zero"
+        android:layout_marginTop="@dimen/margin_25"
+        app:layout_constraintTop_toBottomOf="@+id/card_view_input_layout"
+        />
 
     <FrameLayout
         android:id="@+id/pb_loading"

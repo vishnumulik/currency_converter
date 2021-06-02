@@ -4,8 +4,6 @@ import com.vishnu_mulik.currencyconverter.data.models.CurrencyModel
 import com.vishnu_mulik.currencyconverter.data.models.ExchangeRatesModel
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
 
 
 /**
@@ -14,7 +12,7 @@ import retrofit2.http.Query
 interface RemoteDataCaller {
 
     @GET("/list")
-   suspend fun getCurrencyList(): Response<CurrencyModel>
+    suspend fun getCurrencyList(): Response<CurrencyModel>
 
     @GET("/live")
     suspend fun getExchangeRates(): Response<ExchangeRatesModel>

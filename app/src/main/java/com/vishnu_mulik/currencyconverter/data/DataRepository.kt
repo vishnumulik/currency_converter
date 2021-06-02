@@ -1,18 +1,16 @@
 package com.vishnu_mulik.currencyconverter.data
 
+
 import com.vishnu_mulik.currency_conversion.data.Resource
 import com.vishnu_mulik.currencyconverter.data.localData.SharedPrefrenceData
 import com.vishnu_mulik.currencyconverter.data.localData.room.RoomData
 import com.vishnu_mulik.currencyconverter.data.models.Currency
 import com.vishnu_mulik.currencyconverter.data.models.ExchangeRates
-import com.vishnu_mulik.currencyconverter.data.models.ExchangeRatesModel
 import com.vishnu_mulik.currencyconverter.data.remote.RemoteData
 import com.vishnu_mulik.currencyconverter.utils.DateTimeUtils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-
-
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -28,10 +26,10 @@ class DataRepository @Inject constructor(
 ) : DataRepositorySource {
 
 
-
     override suspend fun getCurrencyList(): Flow<Resource<out Any>> {
         return flow {
-            val lastUpdatedValue = localRepository.getLastUpdatedDate(SHARED_CURRENCY_LAST_UPDATED).data
+            val lastUpdatedValue =
+                localRepository.getLastUpdatedDate(SHARED_CURRENCY_LAST_UPDATED).data
             lastUpdatedValue?.let {
                 if (DateTimeUtils.checkTimeDifference(
                         REMOTE_DATA_CALLER_INTERVAL,
@@ -54,7 +52,9 @@ class DataRepository @Inject constructor(
                                         }
                                         emit(Resource.Success(data = _currencyList))
                                         localRepository.saveLastUpdatedDate(
-                                            SHARED_CURRENCY_LAST_UPDATED,DateTimeUtils.getCurrentTimestamp())
+                                            SHARED_CURRENCY_LAST_UPDATED,
+                                            DateTimeUtils.getCurrentTimestamp()
+                                        )
                                     }
                                 }
                             }
@@ -74,9 +74,10 @@ class DataRepository @Inject constructor(
     }
 
 
-    override suspend fun getExchangeRates(sourceCurrencyValue  : String ): Flow<Resource<out Any>> {
+    override suspend fun getExchangeRates(sourceCurrencyValue: String): Flow<Resource<out Any>> {
         return flow {
-            val lastUpdatedValue = localRepository.getLastUpdatedDate(SHARED_EXCHANGE_LAST_UPDATED).data
+            val lastUpdatedValue =
+                localRepository.getLastUpdatedDate(SHARED_EXCHANGE_LAST_UPDATED).data
             lastUpdatedValue?.let {
                 if (DateTimeUtils.checkTimeDifference(
                         REMOTE_DATA_CALLER_INTERVAL,
@@ -95,15 +96,17 @@ class DataRepository @Inject constructor(
                                         hash.forEach { (key, value) ->
                                             val exchangeRate = ExchangeRates(
                                                 sourceCurrency = sourceCurrencyValue,
-                                                destinationCurrency = key.removeRange(0,2),
-                                                    rate= value
+                                                destinationCurrency = key.removeRange(0, 2),
+                                                rate = value
                                             )
                                             _exchangeRatesList.add(exchangeRate)
                                             roomData.insertExchangeRate(exchangeRate)
                                         }
                                         emit(Resource.Success(data = _exchangeRatesList))
                                         localRepository.saveLastUpdatedDate(
-                                            SHARED_EXCHANGE_LAST_UPDATED,DateTimeUtils.getCurrentTimestamp())
+                                            SHARED_EXCHANGE_LAST_UPDATED,
+                                            DateTimeUtils.getCurrentTimestamp()
+                                        )
                                     }
                                 }
                             }

@@ -2,10 +2,8 @@ package com.vishnu_mulik.currencyconverter.data.remote
 
 
 import com.vishnu_mulik.currency_conversion.data.Resource
-import com.vishnu_mulik.currencyconverter.BuildConfig
 import com.vishnu_mulik.currencyconverter.data.error.NETWORK_ERROR
 import com.vishnu_mulik.currencyconverter.data.error.UN_EXPECTED_RESPONSE
-import com.vishnu_mulik.currencyconverter.data.models.Currency
 import com.vishnu_mulik.currencyconverter.data.models.CurrencyModel
 import com.vishnu_mulik.currencyconverter.data.models.ExchangeRatesModel
 import com.vishnu_mulik.currencyconverter.data.remote.remoteService.RemoteDataCaller
@@ -25,32 +23,39 @@ class RemoteData
 ) : RemoteDataSource {
 
 
-    private suspend fun <T> getResponse(request: suspend () -> Response<T>, defaultErrorMessage: String): Resource<T> {
+    private suspend fun <T> getResponse(
+        request: suspend () -> Response<T>,
+        defaultErrorMessage: String
+    ): Resource<T> {
         return try {
             if (!networkConnectivity.isConnected()) {
                 return Resource.DataError(errorCode = NETWORK_ERROR)
             }
             val result = request.invoke()
             if (result.isSuccessful) {
-                return Resource.Success(data =  result.body())
+                return Resource.Success(data = result.body())
             } else {
-               return  Resource.DataError(errorCode = UN_EXPECTED_RESPONSE)
+                return Resource.DataError(errorCode = UN_EXPECTED_RESPONSE)
             }
         } catch (e: Throwable) {
-            return  Resource.DataError(errorCode = UN_EXPECTED_RESPONSE)
+            return Resource.DataError(errorCode = UN_EXPECTED_RESPONSE)
         }
     }
 
     override suspend fun fetchCurrencyList(): Resource<CurrencyModel> {
         val callerService = retrofit.create(RemoteDataCaller::class.java)
-        return  getResponse( request =  { callerService.getCurrencyList() },
-            defaultErrorMessage = "something went wrong , Please try again." )
+        return getResponse(
+            request = { callerService.getCurrencyList() },
+            defaultErrorMessage = "something went wrong , Please try again."
+        )
     }
 
     override suspend fun fetchExchangeRates(): Resource<ExchangeRatesModel> {
         val callerService = retrofit.create(RemoteDataCaller::class.java)
-        return  getResponse( request =  { callerService.getExchangeRates() },
-            defaultErrorMessage = "something went wrong , Please try again." )
+        return getResponse(
+            request = { callerService.getExchangeRates() },
+            defaultErrorMessage = "something went wrong , Please try again."
+        )
     }
 
 
