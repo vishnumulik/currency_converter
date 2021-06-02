@@ -1,9 +1,8 @@
 package com.vishnu_mulik.currencyconverter.utils
 
-import android.content.Context
 import java.text.SimpleDateFormat
+import java.time.temporal.TemporalAdjusters.previous
 import java.util.*
-import javax.inject.Inject
 
 
 /**
@@ -30,6 +29,13 @@ object DateTimeUtils
 
     fun getCurrentTimestamp() : Long {
         return   System.currentTimeMillis()
+    }
+    fun checkTimeDifference(interval : Int,startTime : Long ,endTime : Long) : Boolean{
+        val diff: Long = endTime- startTime
+        if (diff >= interval * 60 * 1000) {
+           return true
+        }
+        return false
     }
 }
 

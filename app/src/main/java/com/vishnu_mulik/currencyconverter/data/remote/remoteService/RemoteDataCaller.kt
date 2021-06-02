@@ -13,9 +13,12 @@ import retrofit2.http.Query
  */
 interface RemoteDataCaller {
 
-    @GET("list")
-   suspend fun getCurrencyList(@Query("access_key") id: String?): Response<CurrencyModel>
+    @GET("/list")
+   suspend fun getCurrencyList(): Response<CurrencyModel>
 
-    @GET("live")
-    suspend fun getExchangeRates(@Query("access_key") id: String?): Response<ExchangeRatesModel>
+    @GET("/live")
+    suspend fun getExchangeRates(): Response<ExchangeRatesModel>
 }
+
+
+

@@ -15,6 +15,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import com.vishnu_mulik.currencyconverter.BuildConfig
 import com.vishnu_mulik.currencyconverter.data.remote.remoteService.RemoteDataCaller
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 /**
  * CREATED BY Vishnu Mulik  ON  30/05/21
@@ -24,51 +28,40 @@ private const val timeoutRead = 30   //In seconds
 private const val contentType = "Content-Type"
 private const val contentTypeValue = "application/json"
 private const val timeoutConnect = 30   //In seconds
+private const val baseUrl = BuildConfig.SERVER_URL
 
-@Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
 class ServiceGenerator
 @Inject constructor() {
-    private val okHttpBuilder: OkHttpClient.Builder = OkHttpClient.Builder()
-    private lateinit var retrofit: Retrofit
-     lateinit var apiService: RemoteDataCaller
 
-    //private val retrofit: Retrofit
-    private var headerInterceptor = Interceptor { chain ->
-        val original = chain.request()
 
-        val request = original.newBuilder()
-            .header(contentType, contentTypeValue)
-            .method(original.method, original.body)
-            .build()
-
-        chain.proceed(request)
+    @Provides
+    fun provideHTTPLoggingInterceptor(): HttpLoggingInterceptor {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        return interceptor
     }
-    private val logger: HttpLoggingInterceptor
-        get() {
-            val loggingInterceptor = HttpLoggingInterceptor()
-            if (BuildConfig.DEBUG) {
-                loggingInterceptor.apply { level = HttpLoggingInterceptor.Level.BODY }
-            }
-            return loggingInterceptor
-        }
 
-    init {
-        okHttpBuilder.addInterceptor(headerInterceptor)
-        okHttpBuilder.addInterceptor(logger)
-        okHttpBuilder.connectTimeout(timeoutConnect.toLong(), TimeUnit.SECONDS)
-        okHttpBuilder.readTimeout(timeoutRead.toLong(), TimeUnit.SECONDS)
-        val client = okHttpBuilder.build()
-        retrofit = Retrofit.Builder()
-            .baseUrl(BuildConfig.SERVER_URL).client(client)
+    @Provides
+    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor(AuthInterceptor(BuildConfig.ACCESS_KEY))
+            .build()
+    }
+
+    @Provides
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
             .addConverterFactory(MoshiConverterFactory.create(getMoshi()))
+            .client(okHttpClient)
             .build()
-        apiService = retrofit.create(RemoteDataCaller::class.java)
-
     }
 
-    fun <S> createService(serviceClass: Class<S>): S {
-        return retrofit.create(serviceClass)
-    }
 
     private fun getMoshi(): Moshi {
         return Moshi.Builder()
@@ -76,4 +69,6 @@ class ServiceGenerator
             .add(MyStandardJsonAdapters.FACTORY)
             .build()
     }
+
+
 }

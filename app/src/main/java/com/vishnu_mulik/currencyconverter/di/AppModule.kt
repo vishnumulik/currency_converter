@@ -2,6 +2,7 @@ package com.vishnu_mulik.currencyconverter.di
 
 import android.content.Context
 import com.vishnu_mulik.currencyconverter.data.localData.SharedPrefrenceData
+import com.vishnu_mulik.currencyconverter.data.remote.ServiceGenerator
 import com.vishnu_mulik.currencyconverter.utils.Network
 import com.vishnu_mulik.currencyconverter.utils.NetworkConnectivity
 import dagger.Module
@@ -37,4 +38,6 @@ class AppModule {
     fun provideNetworkConnectivity(@ApplicationContext context: Context): NetworkConnectivity {
         return Network(context)
     }
+
+
 }

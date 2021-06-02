@@ -14,15 +14,15 @@ import javax.inject.Inject
 class SharedPrefrenceData
 @Inject constructor(val context : Context) {
 
-    fun getLastUpdatedDate() : Resource<Long> {
+    fun getLastUpdatedDate(key : String ) : Resource<Long> {
         val sharedPref = context.getSharedPreferences(SHARED_PREFERENCES_FILE_NAME, 0)
-        val lastUpdatedValue = sharedPref.getLong(SHARED_EXCHANGE_LAST_UPDATED, 0)
+        val lastUpdatedValue = sharedPref.getLong(key, 0)
         return Resource.Success(lastUpdatedValue)
     }
-    fun saveLastUpdatedDate(dateTimeValue: Long): Resource<Boolean> {
+    fun saveLastUpdatedDate(key : String ,dateTimeValue: Long): Resource<Boolean> {
         val sharedPref = context.getSharedPreferences(SHARED_PREFERENCES_FILE_NAME, 0)
         val editor: SharedPreferences.Editor = sharedPref.edit()
-        editor.putLong(SHARED_EXCHANGE_LAST_UPDATED, dateTimeValue)
+        editor.putLong(key, dateTimeValue)
         editor.apply()
         val isSuccess = editor.commit()
         return Resource.Success(isSuccess)
