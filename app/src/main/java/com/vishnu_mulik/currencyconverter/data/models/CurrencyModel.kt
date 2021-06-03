@@ -14,6 +14,9 @@ data class CurrencyModel(
     @field:Json(name = "privacy")
     val privacy: String,
     @field:Json(name = "success")
-    val currencies: Map<String, String>
+    val currencies: Map<String, String>,
+    @field:Json(name = "error")
+    val error: Error
+
 
 )

@@ -18,6 +18,8 @@ data class ExchangeRatesModel(
     @field:Json(name = "source")
     val source: String,
     @field:Json(name = "quotes")
-    val rates: Map<String, Double>
+    val quotes: Map<String, Double>,
+    @field:Json(name = "error")
+    val error: Error
 
 )

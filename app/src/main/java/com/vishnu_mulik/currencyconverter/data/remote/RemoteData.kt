@@ -50,7 +50,7 @@ class RemoteData
         )
     }
 
-    override suspend fun fetchExchangeRates(): Resource<ExchangeRatesModel> {
+    override suspend fun fetchExchangeRates(sourceCurrencyValue: String): Resource<ExchangeRatesModel> {
         val callerService = retrofit.create(RemoteDataCaller::class.java)
         return getResponse(
             request = { callerService.getExchangeRates() },

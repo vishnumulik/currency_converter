@@ -26,7 +26,7 @@ android {
         debug {
             debuggable true
             buildConfigField "String", "SERVER_URL", "\"http://api.currencylayer.com\""
-            buildConfigField "String", "ACCESS_KEY", "\"fa5f659948409563826a1e708319c956\""
+            buildConfigField "String", "ACCESS_KEY", "\"xyc\""
 
         }
         release {
@@ -34,7 +34,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "SERVER_URL", "\"http://api.currencylayer.com\""
-            buildConfigField "String", "ACCESS_KEY","fa5f659948409563826a1e708319c956"
+            buildConfigField "String", "ACCESS_KEY","kwejfbq"
         }
     }
     flavorDimensions "default"
@@ -111,6 +111,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "com.google.android.material:material:$materialVersion"
     // retrofit
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
     implementation "com.squareup.moshi:moshi:$moshiVersion"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"

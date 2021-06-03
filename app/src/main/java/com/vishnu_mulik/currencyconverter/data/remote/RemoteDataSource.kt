@@ -10,5 +10,5 @@ import com.vishnu_mulik.currencyconverter.data.models.ExchangeRatesModel
  */
 interface RemoteDataSource {
     suspend fun fetchCurrencyList(): Resource<CurrencyModel>
-    suspend fun fetchExchangeRates(): Resource<ExchangeRatesModel>
+    suspend fun fetchExchangeRates(sourceCurrencyValue : String): Resource<ExchangeRatesModel>
 }

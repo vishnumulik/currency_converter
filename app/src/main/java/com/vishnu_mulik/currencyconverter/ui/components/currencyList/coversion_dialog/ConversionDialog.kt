@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.vishnu_mulik.currencyconverter.data.EXCHANGE_RATE
 import com.vishnu_mulik.currencyconverter.databinding.ConversionDialogFragmentBinding
 import com.vishnu_mulik.currencyconverter.utils.afterTextChanged
 
@@ -13,7 +14,7 @@ class ConversionDialog : BottomSheetDialogFragment() {
         fun newInstance(rate : Double): ConversionDialog {
             val dialog = ConversionDialog ()
             val args = Bundle()
-            args.putDouble("data", rate)
+            args.putDouble(EXCHANGE_RATE, rate)
             dialog.setArguments(args)
             return dialog
         }
@@ -28,7 +29,7 @@ class ConversionDialog : BottomSheetDialogFragment() {
         _binding = ConversionDialogFragmentBinding.inflate(inflater, container, false)
         binding.etAmount.afterTextChanged {
             val amountToBeConverted = it.toInt()
-            arguments?.getDouble("data", 1.0)?.let{ rate ->
+            arguments?.getDouble(EXCHANGE_RATE, 1.0)?.let{ rate ->
                 val value = it +" is " + amountToBeConverted * rate
                 binding.calulationAmount.text = value
             }

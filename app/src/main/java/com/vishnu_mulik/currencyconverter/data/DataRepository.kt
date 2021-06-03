@@ -85,13 +85,13 @@ class DataRepository @Inject constructor(
                         DateTimeUtils.getCurrentTimestamp()
                     )
                 ) {
-                    val remoteData = remoteRepository.fetchExchangeRates()
+                    val remoteData = remoteRepository.fetchExchangeRates(sourceCurrencyValue)
                     when (remoteData) {
                         is Resource.Success -> {
                             remoteData.data?.let {
-                                it.rates.let { hash ->
+                                it.quotes.let { hash ->
                                     val _exchangeRatesList = ArrayList<ExchangeRates>()
-                                    if (hash.isNotEmpty()) {
+                                    if (hash != null && hash.isNotEmpty() ) {
                                         roomData.deleteAllExchangeRates()
                                         hash.forEach { (key, value) ->
                                             val exchangeRate = ExchangeRates(
